@@ -36,6 +36,10 @@ const words = [
   { id: 5, word: "shark" },
   { id: 6, word: "fish" },
   { id: 7, word: "elephant" },
+  { id: 8, word: "frog" },
+  { id: 9, word: "mouse" },
+  { id: 10, word: "wolf" },
+  { id: 11, word: "bird" },
 ];
 const images = [
   { id: 0, src: "./zero.jpg" /*add more key/value if need*/ },
@@ -43,7 +47,7 @@ const images = [
   { id: 2, src: "./2.jpg" /*add more key/value if need*/ },
   { id: 3, src: "./3.jpg" /*add more key/value if need*/ },
   { id: 4, src: "./4.jpg" /*add more key/value if need*/ },
-  { id: 5, src: "./GameOver.jpg" /*add more key/value if need*/ },
+  // { id: 5, src: "./GameOver.jpg" /*add more key/value if need*/ },
 ];
 
 // Create Word Box
@@ -83,6 +87,7 @@ function Hangman() {
   // wordBox
   word_box.classList.add("word-box");
   word_head.innerText = "Guess the word";
+  word_head.classList.add("word-Head")
   wordText.innerText =  "The length of word is  " + random_word.length + " and it is an animal name";
   wordText.classList.add("word-text");
   word.classList.add("select-word");
@@ -146,11 +151,7 @@ function update_imgOfMan() {
   console.log(images.length);
   if (wrong_count +1 === images.length) {
     GameOver()
-  } else if (AllWord.join("") === random_word) {
-    console.log("You Won");
-    console.log(AllWord.join(""), "   ", random_word);
-    YouWin ()
-  }else {
+  } else {
     wrong_count += 1;
     console.log(images[wrong_count].src, " ", wrong_count);
     imgOfMan.src = images[wrong_count].src;
@@ -169,6 +170,12 @@ function check_words(current_key) {
   if (flag) {
     update_imgOfMan();
   }
+
+  if (wrong_count +1 === images.length) {
+    GameOver()
+  } else if (AllWord.join("") === random_word) {
+    YouWin ()
+}
 }
 
 // Reset Game function
@@ -176,6 +183,7 @@ function Reset_Game() {
   imgOfMan.src = images[0].src;
   random_word = choose_word(words);
   AllWord = under_score(random_word.length).split(" ");
+  word_head.innerText = "Guess the word "
   word.innerText = under_score(random_word.length);
   wordText.innerText = "The length of word is  " + random_word.length + " and it is an animal name";
   wrong_count = 0;
@@ -189,16 +197,18 @@ function Reset_Game() {
 
 // End Game function
 function GameOver() {
+  imgOfMan.src = "./GameOver.jpg"
 word_head.innerText = "Game Over"
-word.innerText = ""
-wordText.innerText = ""
+word.innerText = "hard luck".toLocaleUpperCase()
+wordText.innerText = "Wrong answer!" 
 
 }
 
 // You win function
 function YouWin() {
+  imgOfMan.src = "./win.png"
   word_head.innerText = "You Win"
-  word.innerText = ""
-  wordText.innerText = ""
+  word.innerText = "Congratulation!"
+  wordText.innerText = "Correct answer!"
   }
 Hangman();
