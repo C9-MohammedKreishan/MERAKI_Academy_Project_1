@@ -4,6 +4,73 @@
 
 }
 
+
+.welcom-container {
+    display:grid;
+    grid-template-columns: 1fr 3fr ;
+    grid-template-rows: 1fr  ;
+    /* border: 5px solid; */
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start:1 ;
+}
+
+.welcome-paragraph {
+    font-size: 26px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.015rem;
+    line-height: 1.67;
+    align-content: center;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start:1 ;
+    margin: 25px;
+    margin-bottom: 25px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 20px;
+    justify-content: center;
+    border: 3px solid;
+}
+.student-class {
+    display: grid;
+    margin: 25px;
+    grid-template-columns: 1fr ;
+    grid-template-rows:  1fr ;
+    font-size: 26px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.015rem;
+    line-height: 1.67;
+    align-content: center;
+    align-content: center;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start:1;
+}
+
+.welcom-container > button {
+    margin-left: 770px;
+    /* margin-top: 435px; */
+    height: 80px;
+    width: 280px;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start:2 ;
+}
+
+.img-Meraki {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start:1 ;
+    height: 220px;
+    width: 220px;
+    padding-left: 20px;
+    border: 0px solid;
+
+}
+
 header{
     font-size: 27px;
     border-bottom: 5px solid;

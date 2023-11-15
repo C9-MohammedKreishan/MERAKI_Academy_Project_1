@@ -39,7 +39,17 @@ const words = [
   { id: 8, word: "frog" },
   { id: 9, word: "mouse" },
   { id: 10, word: "wolf" },
-  { id: 11, word: "bird" },
+  { id: 11, word: "horse" },
+  { id: 12, word: "monkey" },
+  { id: 13, word: "sneck" },
+  { id: 14, word: "camel" },
+  { id: 15, word: "bear" },
+  { id: 16, word: "whale" },
+  { id: 17, word: "spider" },
+  { id: 18, word: "scorpion" },
+  { id: 19, word: "bat" },
+  { id: 20, word: "rabbit" },
+  { id: 21, word: "giraffe" },
 ];
 const images = [
   { id: 0, src: "./zero.jpg" /*add more key/value if need*/ },
@@ -47,8 +57,52 @@ const images = [
   { id: 2, src: "./2.jpg" /*add more key/value if need*/ },
   { id: 3, src: "./3.jpg" /*add more key/value if need*/ },
   { id: 4, src: "./4.jpg" /*add more key/value if need*/ },
-  // { id: 5, src: "./GameOver.jpg" /*add more key/value if need*/ },
+  { id: 5, src: "./5.jpg" /*add more key/value if need*/ },
 ];
+
+// Start page
+const Start_game = document.createElement("div");
+Start_game.classList.add("welcom-container");
+const start_btn = document.createElement("button");
+const welcome_paragraph = document.createElement("p");
+welcome_paragraph.innerText =
+  "Welcome to the Hangman Game on our website! Get ready for a thrilling word-guessing challenge. To play, simply start by selecting letters to unveil the mystery word. With each correct guess, the hidden letters are revealed, but beware—incorrect guesses bring you one step closer to the suspenseful hangman's completion. Your mission is to crack the code and guess the entire word before the hangman takes its final form. Test your linguistic skills, and may the odds be in your favor as you embark on this engaging and interactive journey. Best of luck!";
+welcome_paragraph.classList.add("welcome-paragraph");
+start_btn.innerText = "Start Game";
+const Student = document.createElement("div")
+Student.classList.add("welcom-container", "student-class")
+Student.innerText = "Project_1 \n HangMan Game \nPrepared by: \n Mohammad Kreishan"
+const imgMeraki = document.createElement("img")
+imgMeraki.classList.add("img-Meraki")
+imgMeraki.classList.add("welcom-container")
+imgMeraki.src = "./Meraki.jpg"
+Student.append(imgMeraki)
+Start_game.append(start_btn, welcome_paragraph,Student);
+body.append(Start_game);
+
+// Create how to play
+const HowToPlay = document.createElement("div");
+HowToPlay.classList.add("how-to-play");
+const HowToPlayHeader = document.createElement("h2");
+const paragraph_1 = document.createElement("p");
+paragraph_1.innerText = "Welcome to Hangman!";
+const paragraph_2 = document.createElement("p");
+paragraph_2.innerText =
+  "Guess the hidden word by inputting letters. Each incorrect guess reveals part of the hangman.";
+const paragraph_3 = document.createElement("p");
+paragraph_3.innerText =
+  "Use the input area, uncover the word, and beat the hangman!";
+const paragraph_4 = document.createElement("p");
+paragraph_4.innerText = "Have fun testing your word skills!";
+HowToPlay.append(
+  HowToPlayHeader,
+  paragraph_1,
+  paragraph_2,
+  paragraph_3,
+  paragraph_4
+);
+body.append(HowToPlay);
+HowToPlay.style.display = "none";
 
 // Create Word Box
 const word_box = document.createElement("div");
@@ -75,20 +129,28 @@ alphabet.forEach((element) => {
 
 // Create buttons Box
 const ResetGame = document.createElement("button");
+start_btn.addEventListener("click", Hangman);
 
+// HangMan function --> Start Game
 function Hangman() {
+  // Start
+  Start_game.style.display = "none";
+  HowToPlay.style.display = "block";
+
   // ResetGame
   ResetGame.classList.add("btns-Box");
   ResetGame.innerText = "Reset";
   btnsBox.append(ResetGame);
   ResetGame.addEventListener("click", Reset_Game);
 
-
   // wordBox
   word_box.classList.add("word-box");
   word_head.innerText = "Guess the word";
-  word_head.classList.add("word-Head")
-  wordText.innerText =  "The length of word is  " + random_word.length + " and it is an animal name";
+  word_head.classList.add("word-Head");
+  wordText.innerText =
+    "The length of word is  " +
+    random_word.length +
+    " and it is an animal name";
   wordText.classList.add("word-text");
   word.classList.add("select-word");
   word.innerText = under_score(random_word.length);
@@ -149,8 +211,8 @@ function update_wordBox(current_key, char) {
 let wrong_count = 0;
 function update_imgOfMan() {
   console.log(images.length);
-  if (wrong_count +1 === images.length) {
-    GameOver()
+  if (wrong_count + 1 === images.length) {
+    GameOver();
   } else {
     wrong_count += 1;
     console.log(images[wrong_count].src, " ", wrong_count);
@@ -171,11 +233,11 @@ function check_words(current_key) {
     update_imgOfMan();
   }
 
-  if (wrong_count +1 === images.length) {
-    GameOver()
+  if (wrong_count + 1 === images.length) {
+    GameOver();
   } else if (AllWord.join("") === random_word) {
-    YouWin ()
-}
+    YouWin();
+  }
 }
 
 // Reset Game function
@@ -183,32 +245,37 @@ function Reset_Game() {
   imgOfMan.src = images[0].src;
   random_word = choose_word(words);
   AllWord = under_score(random_word.length).split(" ");
-  word_head.innerText = "Guess the word "
+  word_head.innerText = "Guess the word ";
   word.innerText = under_score(random_word.length);
-  wordText.innerText = "The length of word is  " + random_word.length + " and it is an animal name";
+  wordText.innerText =
+    "The length of word is  " +
+    random_word.length +
+    " and it is an animal name";
   wrong_count = 0;
-  key.style.background = "black"
-  const btns = document.querySelectorAll(".alpha_btn")
-  btns.forEach(function(element,index){
-    element.style.background =  "whitesmoke"
-  })
-
+  key.style.background = "black";
+  const btns = document.querySelectorAll(".alpha_btn");
+  btns.forEach(function (element, index) {
+    element.style.background = "whitesmoke";
+  });
 }
 
 // End Game function
 function GameOver() {
-  imgOfMan.src = "./GameOver.jpg"
-word_head.innerText = "Game Over"
-word.innerText = "hard luck".toLocaleUpperCase()
-wordText.innerText = "Wrong answer!" 
-
+  imgOfMan.src = "./GameOver.jpg";
+  word_head.innerText = "Game Over";
+  word.innerText = "hard luck".toLocaleUpperCase();
+  wordText.innerText = "Wrong answer!";
 }
 
 // You win function
 function YouWin() {
-  imgOfMan.src = "./win.png"
-  word_head.innerText = "You Win"
-  word.innerText = "Congratulation!"
-  wordText.innerText = "Correct answer!"
-  }
-Hangman();
+  imgOfMan.src = "./win.png";
+  word_head.innerText = "You Win";
+  word.innerText = "Congratulation!";
+  wordText.innerText = "Correct answer!";
+}
+
+function myFunction() {
+  document.getElementById("myDIV").style.display = "none";
+}
+// Hangman();
