@@ -52,7 +52,7 @@ const words = [
   { id: 21, word: "giraffe" },
 ];
 const images = [
-  { id: 0, src: "./zero.jpg" /*add more key/value if need*/ },
+  { id: 0, src: "./0.jpg" /*add more key/value if need*/ },
   { id: 1, src: "./1.jpg" /*add more key/value if need*/ },
   { id: 2, src: "./2.jpg" /*add more key/value if need*/ },
   { id: 3, src: "./3.jpg" /*add more key/value if need*/ },
@@ -64,20 +64,28 @@ const images = [
 const Start_game = document.createElement("div");
 Start_game.classList.add("welcom-container");
 const start_btn = document.createElement("button");
+const MoodButton = document.createElement("button")
+MoodButton.innerText = "Dark Mood"
+MoodButton.classList.add("welcom-container")
+MoodButton.classList.add("Mood")
+
 const welcome_paragraph = document.createElement("p");
 welcome_paragraph.innerText =
   "Welcome to the Hangman Game on our website! Get ready for a thrilling word-guessing challenge. To play, simply start by selecting letters to unveil the mystery word. With each correct guess, the hidden letters are revealed, but beware—incorrect guesses bring you one step closer to the suspenseful hangman's completion. Your mission is to crack the code and guess the entire word before the hangman takes its final form. Test your linguistic skills, and may the odds be in your favor as you embark on this engaging and interactive journey. Best of luck!";
 welcome_paragraph.classList.add("welcome-paragraph");
 start_btn.innerText = "Start Game";
-const Student = document.createElement("div")
-Student.classList.add("welcom-container", "student-class")
-Student.innerText = "Project_1 \n HangMan Game \nPrepared by: \n Mohammad Kreishan"
-const imgMeraki = document.createElement("img")
-imgMeraki.classList.add("img-Meraki")
-imgMeraki.classList.add("welcom-container")
-imgMeraki.src = "./Meraki.jpg"
-Student.append(imgMeraki)
-Start_game.append(start_btn, welcome_paragraph,Student);
+
+// Create Student section
+const Student = document.createElement("div");
+Student.classList.add("welcom-container", "student-class");
+Student.innerText =
+  "Project_1 \n HangMan Game \nPrepared by: \n Mohammad Kreishan";
+const imgMeraki = document.createElement("img");
+imgMeraki.classList.add("img-Meraki");
+imgMeraki.classList.add("welcom-container");
+imgMeraki.src = "./Meraki.jpg";
+Student.append(imgMeraki);
+Start_game.append(start_btn, welcome_paragraph, Student);
 body.append(Start_game);
 
 // Create how to play
@@ -129,6 +137,7 @@ alphabet.forEach((element) => {
 
 // Create buttons Box
 const ResetGame = document.createElement("button");
+
 start_btn.addEventListener("click", Hangman);
 
 // HangMan function --> Start Game
@@ -157,7 +166,7 @@ function Hangman() {
   word_box.append(word_head, wordText, word);
 
   // Picture Box
-  imgOfMan.src = "./zero.jpg";
+  imgOfMan.src = "./0.jpg";
   pictureBox.append(imgOfMan);
   pictureBox.classList.add("picture-Box");
 
@@ -186,13 +195,11 @@ function under_score(len) {
 function input_key(e) {
   let current_key = e.target.innerText;
   e.target.style.background = "red";
-  console.log(e.target);
   check_words(current_key);
 }
 
 // Choose word function ==> function chooses randomly word from array (Words).
 function choose_word(words) {
-  console.log(Math.floor(Math.random() * words.length));
   return words[Math.floor(Math.random() * words.length)].word;
 }
 
@@ -201,27 +208,24 @@ let AllWord = under_score(random_word.length).split(" ");
 
 // Update wordBox function ==> the function updates the wordBox section after each input, if the input is true.
 function update_wordBox(current_key, char) {
-  console.log(current_key, char);
   AllWord[char] = current_key;
-  console.log(AllWord);
   word.innerText = AllWord.join("");
 }
 
+
 // Update imgOfMan section ==> the function updates the imgOfMan section after each input, if the input is wrong.
 let wrong_count = 0;
-function update_imgOfMan() {
-  console.log(images.length);
+const update_imgOfMan = () => {
   if (wrong_count + 1 === images.length) {
     GameOver();
   } else {
     wrong_count += 1;
-    console.log(images[wrong_count].src, " ", wrong_count);
     imgOfMan.src = images[wrong_count].src;
   }
-}
+};
 
 // Check word function
-function check_words(current_key) {
+const check_words = (current_key) => {
   let flag = true;
   for (char in random_word) {
     if (random_word[char] === current_key) {
@@ -238,10 +242,10 @@ function check_words(current_key) {
   } else if (AllWord.join("") === random_word) {
     YouWin();
   }
-}
+};
 
 // Reset Game function
-function Reset_Game() {
+const Reset_Game = () => {
   imgOfMan.src = images[0].src;
   random_word = choose_word(words);
   AllWord = under_score(random_word.length).split(" ");
@@ -257,25 +261,31 @@ function Reset_Game() {
   btns.forEach(function (element, index) {
     element.style.background = "whitesmoke";
   });
-}
+};
 
 // End Game function
-function GameOver() {
+const GameOver = () => {
   imgOfMan.src = "./GameOver.jpg";
   word_head.innerText = "Game Over";
   word.innerText = "hard luck".toLocaleUpperCase();
   wordText.innerText = "Wrong answer!";
-}
+};
 
 // You win function
-function YouWin() {
+const YouWin = () => {
   imgOfMan.src = "./win.png";
   word_head.innerText = "You Win";
   word.innerText = "Congratulation!";
   wordText.innerText = "Correct answer!";
+};
+
+const myFunction = () => {
+  document.getElementById("myDIV").style.display = "none";
+};
+
+const DarkMood = () => {
+  console.log(2222);
+  body.style.background = "black";
+  body.style.color = " whitesmoke"
 }
 
-function myFunction() {
-  document.getElementById("myDIV").style.display = "none";
-}
-// Hangman();
