@@ -64,11 +64,15 @@ const images = [
 const Start_game = document.createElement("div");
 Start_game.classList.add("welcom-container");
 const start_btn = document.createElement("button");
-const MoodButton = document.createElement("button")
-MoodButton.innerText = "Dark Mood"
-MoodButton.classList.add("welcom-container")
-MoodButton.classList.add("Mood")
 
+
+// Create audio
+const Sound = document.createElement("audio")
+Sound.innerText = "Sound"
+// Sound.controls = true
+
+
+// Creat Welcome Paragraph
 const welcome_paragraph = document.createElement("p");
 welcome_paragraph.innerText =
   "Welcome to the Hangman Game on our website! Get ready for a thrilling word-guessing challenge. To play, simply start by selecting letters to unveil the mystery word. With each correct guess, the hidden letters are revealed, but beware—incorrect guesses bring you one step closer to the suspenseful hangman's completion. Your mission is to crack the code and guess the entire word before the hangman takes its final form. Test your linguistic skills, and may the odds be in your favor as you embark on this engaging and interactive journey. Best of luck!";
@@ -86,7 +90,7 @@ imgMeraki.classList.add("welcom-container");
 imgMeraki.src = "./Meraki.jpg";
 Student.append(imgMeraki);
 Start_game.append(start_btn, welcome_paragraph, Student);
-body.append(Start_game);
+body.append(Start_game,Sound);
 
 // Create how to play
 const HowToPlay = document.createElement("div");
@@ -193,6 +197,8 @@ function under_score(len) {
 
 // Input key function
 function input_key(e) {
+  Sound.src = "Click.wav"
+  Sound.play()
   let current_key = e.target.innerText;
   e.target.style.background = "red";
   check_words(current_key);
@@ -246,6 +252,8 @@ const check_words = (current_key) => {
 
 // Reset Game function
 const Reset_Game = () => {
+  Sound.src = "reset.mp3"
+  Sound.play()
   imgOfMan.src = images[0].src;
   random_word = choose_word(words);
   AllWord = under_score(random_word.length).split(" ");
@@ -265,6 +273,8 @@ const Reset_Game = () => {
 
 // End Game function
 const GameOver = () => {
+  Sound.src = "Game_Over.mp3"
+  Sound.play()
   imgOfMan.src = "./GameOver.jpg";
   word_head.innerText = "Game Over";
   word.innerText = "hard luck".toLocaleUpperCase();
@@ -273,19 +283,15 @@ const GameOver = () => {
 
 // You win function
 const YouWin = () => {
+  Sound.src = "win_sound.mp3"
+  Sound.play()
   imgOfMan.src = "./win.png";
   word_head.innerText = "You Win";
   word.innerText = "Congratulation!";
   wordText.innerText = "Correct answer!";
 };
 
-const myFunction = () => {
-  document.getElementById("myDIV").style.display = "none";
-};
 
-const DarkMood = () => {
-  console.log(2222);
-  body.style.background = "black";
-  body.style.color = " whitesmoke"
-}
+
+
 
